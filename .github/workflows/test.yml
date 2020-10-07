@@ -1,5 +1,6 @@
 name: Validate 'setup-xamarin'
 on:
+  push:
   pull_request:
   schedule:
     - cron: 0 0 * * *
@@ -48,8 +49,7 @@ jobs:
     - name: setup-xamarin
       uses: ./
       with:
-        xamarin-ios-version: 13.10.0.21
-        xamarin-mac-version: 6.6.0.12
+        xamarin-ios-version: 14.0
 
     - name: Validate versions
       run: pwsh ./__tests__/validate-xamarin-versions.ps1 -XamarinIOSVersion "13.10.0.21" -XamarinMacVersion "6.6.0.12"
