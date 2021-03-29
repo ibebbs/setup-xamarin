@@ -8,11 +8,7 @@ interface InvokeCommandOptions {
 export const invokeCommandSync = (command: string, args: string[], options: InvokeCommandOptions): void => {
     let execResult: child.SpawnSyncReturns<string>;
 
-    if (options.sudo) {
-        execResult = child.spawnSync("sudo", [command, ...args]);
-    } else {
-        execResult = child.spawnSync(command, args);
-    }
+    execResult = child.spawnSync("sudo", [command, ...args]);
 
     if (execResult.status !== 0) {
         const fullCommand = `${options.sudo ? "sudo " : ""}${command} ${args.join(" ")}`;
