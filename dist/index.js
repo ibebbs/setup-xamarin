@@ -824,14 +824,9 @@ const child = __importStar(__webpack_require__(129));
 const os_1 = __webpack_require__(87);
 exports.invokeCommandSync = (command, args, options) => {
     let execResult;
-    if (options.sudo) {
-        execResult = child.spawnSync("sudo", [command, ...args]);
-    }
-    else {
-        execResult = child.spawnSync(command, args);
-    }
+    execResult = child.spawnSync("sudo", [command, ...args]);
     if (execResult.status !== 0) {
-        const fullCommand = `${options.sudo ? "sudo " : ""}${command} ${args.join(" ")}`;
+        const fullCommand = `sudo ${command} ${args.join(" ")}`;
         throw new Error([
             `Error during run '${fullCommand}'`,
             execResult.stderr,
